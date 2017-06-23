@@ -11,6 +11,7 @@
 # AUTOSCALER_CLUSTER - Name of the ECS cluster running the dynamoDB autoscaler
 # AUTOSCALER_REGION - Region of the ECS cluster running the autoscaler
 # AUTOSCALER_SERVICE - Name of the service that is the dynamoDB autoscaler
+# DEBUG_OUTPUT - Optional.  If set, enables bash -x
 
 #
 # Get the number of RUNNING tsaks for the autoscaler ECS service
@@ -84,6 +85,11 @@ resumeScaler()
 #
 # MAINLINE
 #
+if [ "$DEBUG_OUTPUT" ]; then
+    echo "DEBUG Output selected"
+    set -x
+fi
+
 echo "Autoscaler controller startup"
 while :
 do
