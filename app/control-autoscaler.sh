@@ -81,8 +81,13 @@ resumeScaler()
   fi
 }
 
+#
+# MAINLINE
+#
+echo "Autoscaler controller startup"
 while :
 do
+  echo "Autoscaler controller wake up"
   echo "Checking for EMR clusters with prefix ${EMR_PREFIX}"
 
   cluster_list=$(aws emr list-clusters --active --query 'Clusters[*].Name' --output text --region ${EMR_REGION})
@@ -103,5 +108,6 @@ do
       fi
     done
   fi
+  echo "Autoscaler controller complete"
   sleep 60
 done
